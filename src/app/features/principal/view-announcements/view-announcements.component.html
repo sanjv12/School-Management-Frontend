@@ -1,0 +1,12 @@
+<div class="announcements-container">
+  <h2>All Announcements</h2>
+
+  <div *ngIf="loading" class="status">Loading announcements...</div>
+  <div *ngIf="error" class="status error">{{ error }}</div>
+
+  <mat-card *ngFor="let a of announcements" class="announcement-item">
+    <h3>{{ a.title }}</h3>
+    <p>{{ a.content }}</p>
+    <small>{{ a.date | date: 'medium' }}</small>
+  </mat-card>
+</div>

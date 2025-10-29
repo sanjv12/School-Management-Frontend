@@ -1,0 +1,75 @@
+<div class="sidenav-header">
+  <h2>{{ role | titlecase }}</h2>
+</div>
+
+<mat-nav-list>
+  <!-- Principal specific items -->
+  <ng-container *ngIf="role === 'principal'">
+   <mat-list-item [routerLink]="['/principal/add-student']" *ngIf="role === 'principal'">
+  <mat-icon matListIcon>person_add</mat-icon>
+  <span matLine>Add Student</span>
+</mat-list-item>
+
+     <mat-list-item [routerLink]="['/principal/add-teacher']" *ngIf="role === 'principal'">
+    <mat-icon matListIcon>school</mat-icon>
+    <span matLine>Add Teacher</span>
+  </mat-list-item>
+
+    <mat-list-item [routerLink]="['/principal/view-students']" *ngIf="role === 'principal'">
+    <mat-icon matListIcon>people</mat-icon>
+    <span matLine>View Students</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/principal/view-teachers']" *ngIf="role === 'principal'">
+      <mat-icon matListIcon>groups</mat-icon>
+      <span matLine>View Teachers</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/principal/create-announcement']" *ngIf="role === 'principal'">
+  <mat-icon matListIcon>campaign</mat-icon>
+  <span matLine>Create Announcement</span>
+</mat-list-item>
+
+<mat-list-item [routerLink]="['/principal/view-announcements']" *ngIf="role === 'principal'">
+  <mat-icon matListIcon>announcement</mat-icon>
+  <span matLine>View Announcements</span>
+</mat-list-item>
+
+
+    <mat-list-item>
+      <mat-icon matListIcon>notifications</mat-icon>
+      <span matLine>Leave Approvals</span>
+    </mat-list-item>
+  </ng-container>
+
+
+  <!-- Teacher -->
+  <ng-container *ngIf="role === 'teacher'">
+    <mat-list-item>
+      <mat-icon matListIcon>class</mat-icon>
+      <span matLine>My Classes</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon matListIcon>assignment</mat-icon>
+      <span matLine>Assignments</span>
+    </mat-list-item>
+
+    <mat-list-item>
+      <mat-icon matListIcon>event</mat-icon>
+      <span matLine>Apply Leave</span>
+    </mat-list-item>
+  </ng-container>
+
+  <!-- Student -->
+ <mat-nav-list *ngIf="role === 'student'">
+  <a mat-list-item routerLink="/student/pay-fees"><mat-icon>payment</mat-icon>Pay Fees</a>
+  <a mat-list-item routerLink="/student/request-leave"><mat-icon>event</mat-icon>Request Leave</a>
+  <a mat-list-item routerLink="/student/study-material"><mat-icon>menu_book</mat-icon>Study Material</a>
+  <a mat-list-item routerLink="/student/announcements"><mat-icon>campaign</mat-icon>Announcements</a>
+  <a mat-list-item routerLink="/student/marks"><mat-icon>grade</mat-icon>Marks</a>
+  <a mat-list-item routerLink="/student/attendance"><mat-icon>fact_check</mat-icon>Attendance</a>
+  <a mat-list-item routerLink="/student/details"><mat-icon>person</mat-icon>My Details</a>
+  <a mat-list-item routerLink="/login"><mat-icon>logout</mat-icon>Logout</a>
+</mat-nav-list>
+</mat-nav-list>

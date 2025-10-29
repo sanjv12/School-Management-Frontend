@@ -1,0 +1,25 @@
+<div class="announcements-container">
+  <h2>Announcements</h2>
+
+  <div *ngIf="isLoading" class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div *ngIf="errorMsg && !isLoading" class="error">
+    {{ errorMsg }}
+  </div>
+
+  <div *ngIf="!isLoading && announcements.length === 0">
+    <p>No announcements available.</p>
+  </div>
+
+  <div *ngIf="!isLoading && announcements.length > 0">
+    <mat-card *ngFor="let ann of announcements" class="announcement-card">
+      <mat-card-title>{{ ann.title }}</mat-card-title>
+      <mat-card-content>
+        <p>{{ ann.message }}</p>
+        <p class="date">{{ ann.date | date:'medium' }}</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

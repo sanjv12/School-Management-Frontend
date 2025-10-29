@@ -1,0 +1,27 @@
+.pay-fees-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.fee-card {
+  padding: 1.5rem;
+  width: 320px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+button {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.success {
+  color: green;
+  margin-top: 1rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}

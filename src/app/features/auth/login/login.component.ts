@@ -5,57 +5,97 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+// 1. Import the AuthService
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule
-  ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  ],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
 
-  loginForm!: FormGroup;  
-  isLoading = false;
-  errorMsg = '';
+  loginForm!: FormGroup;  
+  isLoading = false;
+  errorMsg = '';
 
-  constructor(private fb: FormBuilder, private router: Router) {
-    this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-  onSubmit() {
-    if (this.loginForm.invalid) {
-      this.errorMsg = 'Please fill in all fields';
-      return;
+  // 3. Inject AuthService into the constructor
+  constructor(
+    private fb: FormBuilder, 
+    private router: Router, 
+    private authService: AuthService // Inject AuthService
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
+  private getDashboardPath(role: string): string {
+    console.log(role);
+    if(role == 'principal'){
+      return '/principal';
+    }else if(role == 'student'){
+      return '/student';
+    }else if(role == 'teacher'){
+      return '/teacher';
+    }else{
+      this.authService.logout(); // Assuming you add a logout method
+        this.errorMsg = 'Unknown user role returned by server.';
+        return '/login'; 
     }
-
-    this.isLoading = true;
-    this.errorMsg = '';
-
-    const { username, password } = this.loginForm.value;
-
-    // 🔹 Placeholder for API call
-    // Replace this with actual AuthService call later
-    // this.authService.loginPrincipal(username!, password!).subscribe(...)
-
-    // Temporary mock login
-    setTimeout(() => {
-      this.isLoading = false;
-      if (username === 'principal' && password === 'admin123') {
-        alert('Login successful (principal)');
-        this.router.navigate(['/dashboard']);
-      } else {
-        this.errorMsg = 'Invalid credentials';
-      }
-    }, 1000);
+    // switch (role) {
+    //   case 'principal':
+    //     return '/principal';
+    //   case 'student':
+    //     return '/student';
+    //   case 'teacher':
+    //     return '/teacher';
+    //   default:
+    //     // Handle unknown roles
+    //     this.authService.logout(); // Assuming you add a logout method
+    //     this.errorMsg = 'Unknown user role returned by server.';
+    //     return '/login'; 
+    // }
   }
+  // 4. Update the onSubmit method
+   onSubmit() {
+   if (this.loginForm.invalid) {
+    this.errorMsg = 'Please fill in all fields';
+   return;
+  }
+
+  this.isLoading = true;
+  this.errorMsg = '';
+  const { username, password } = this.loginForm.value;
+
+    // Call the service and subscribe to the role string result
+   this.authService.login(username!, password!).subscribe({
+      next: (role: string) => {
+        // Successful login: Use the returned role to navigate
+        this.isLoading = false;
+        
+        const path = this.getDashboardPath(role);
+        
+        // Navigate based on the resolved path
+        if (path !== '/login') {
+            alert(`Login successful as ${role}! Navigating...`);
+            // console.log(path);
+            this.router.navigate([path]); 
+        }
+      },
+      error: (err) => {
+        // Login failure: Display the error message from the service
+        this.isLoading = false;
+        this.errorMsg = err.message || 'An error occurred during login.';
+      }
+    });
+  }
 }

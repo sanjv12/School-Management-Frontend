@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
+import { SidebarComponent } from '../../../layouts/sidebar/sidebar.component';
+import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-student-dashboard',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, SidebarComponent, RouterOutlet],
   templateUrl: './student-dashboard.component.html',
-  styleUrl: './student-dashboard.component.css'
+  styleUrls: ['./student-dashboard.component.css']
 })
-export class StudentDashboardComponent {
 
+
+export class StudentDashboardComponent {
+  
 }

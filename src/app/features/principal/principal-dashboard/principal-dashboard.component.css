@@ -1,0 +1,14 @@
+.dashboard-container {
+  height: 100vh;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  padding: 2rem;
+  background: #fafafa;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+}

@@ -1,0 +1,19 @@
+<mat-card class="announcement-card">
+  <h2>Create Announcement</h2>
+
+  <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter announcement title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Content</mat-label>
+      <textarea matInput formControlName="content" rows="5" placeholder="Enter announcement content"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="isSubmitting">Post</button>
+  </form>
+
+  <div class="message" *ngIf="message">{{ message }}</div>
+</mat-card>

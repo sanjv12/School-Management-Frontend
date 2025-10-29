@@ -1,0 +1,19 @@
+<div class="pay-fees-container" *ngIf="feeDue !== null; else loading">
+  <mat-card class="fee-card">
+    <h2>Pay Fees</h2>
+    <p><strong>Pending Fees:</strong> ₹{{ feeDue }}</p>
+
+    <button mat-raised-button color="primary"
+            (click)="payFee()"
+            [disabled]="isPaying || feeDue <= 0">
+      {{ isPaying ? 'Processing...' : (feeDue > 0 ? 'Pay Now' : 'Paid') }}
+    </button>
+
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <p>Loading fee details...</p>
+</ng-template>
