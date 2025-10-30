@@ -1,0 +1,24 @@
+<div class="announcement-container">
+  <h2>Post Announcement for Students</h2>
+
+  <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Content</mat-label>
+      <textarea matInput rows="5" formControlName="content"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Teacher ID</mat-label>
+      <input matInput type="number" formControlName="teacherId" />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
+      {{ isLoading ? 'Posting...' : 'Post Announcement' }}
+    </button>
+  </form>
+</div>

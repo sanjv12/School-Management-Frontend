@@ -1,0 +1,13 @@
+.announcement-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}

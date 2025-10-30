@@ -1,0 +1,13 @@
+<div class="study-material-container">
+  <h2>Study Materials</h2>
+
+  <div *ngIf="materials.length === 0" class="no-data">
+    No study materials available.
+  </div>
+
+  <div *ngFor="let m of materials" class="material-card">
+    <h3>{{ m.title }}</h3>
+    <p>{{ m.contentText }}</p>
+    <small><b>Class ID:</b> {{ m.classId }}</small>
+  </div>
+</div>
