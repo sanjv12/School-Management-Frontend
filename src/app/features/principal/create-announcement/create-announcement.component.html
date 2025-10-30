@@ -1,4 +1,4 @@
-<mat-card class="announcement-card">
+<!-- <mat-card class="announcement-card">
   <h2>Create Announcement</h2>
 
   <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
@@ -16,4 +16,37 @@
   </form>
 
   <div class="message" *ngIf="message">{{ message }}</div>
-</mat-card>
+</mat-card> -->
+
+<div class="create-announcement-container">
+  <h2>Create Announcement</h2>
+
+  <form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter announcement title" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>content</mat-label>
+      <textarea matInput formControlName="content" rows="4" placeholder="Enter message"></textarea>
+    </mat-form-field>
+
+    <!-- 👇 New dropdown for Target Role -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Target Role</mat-label>
+      <mat-select formControlName="targetRole">
+        <mat-option value="ALL">All</mat-option>
+        <mat-option value="TEACHER">Teacher</mat-option>
+        <mat-option value="STUDENT">Student</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="announcementForm.invalid">
+      Create
+    </button>
+  </form>
+
+  <p *ngIf="successMsg" class="success">{{ successMsg }}</p>
+  <p *ngIf="errorMsg" class="error">{{ errorMsg }}</p>
+</div>

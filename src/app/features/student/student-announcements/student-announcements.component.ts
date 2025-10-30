@@ -7,7 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 interface Announcement {
   id: number;
   title: string;
-  message: string;
+  content: string;
   date: string;
 }
 

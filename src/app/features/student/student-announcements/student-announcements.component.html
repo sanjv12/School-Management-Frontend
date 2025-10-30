@@ -17,7 +17,7 @@
     <mat-card *ngFor="let ann of announcements" class="announcement-card">
       <mat-card-title>{{ ann.title }}</mat-card-title>
       <mat-card-content>
-        <p>{{ ann.message }}</p>
+        <p>{{ ann.content }}</p>
         <p class="date">{{ ann.date | date:'medium' }}</p>
       </mat-card-content>
     </mat-card>
