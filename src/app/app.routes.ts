@@ -5,6 +5,7 @@ import { TeacherDashboardComponent } from './features/teacher/teacher-dashboard/
  import { StudentDashboardComponent } from './features/student/student-dashboard/student-dashboard.component';
   import { PRINCIPAL_ROUTES } from './features/principal/principal.routes'; 
 import { studentRoutes } from './features/student/student.routes';
+import { TEACHER_ROUTES } from './features/teacher/teacher.routes';
   export const routes: Routes = [
      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent }, 
@@ -13,4 +14,5 @@ import { studentRoutes } from './features/student/student.routes';
       { path: 'student', component: StudentDashboardComponent }, 
       { path: 'principal', children: PRINCIPAL_ROUTES },
       {path:'student',children: studentRoutes },
+      { path: 'teacher', children: TEACHER_ROUTES },
    ];

@@ -1,0 +1,16 @@
+.announcement-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+}
+
+.announcement-card {
+  background-color: #fafafa;
+}
+
+.loading, .error, .no-data {
+  text-align: center;
+  margin-top: 20px;
+  color: #777;
+}

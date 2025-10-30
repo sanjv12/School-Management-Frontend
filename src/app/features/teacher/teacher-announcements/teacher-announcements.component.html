@@ -1,0 +1,23 @@
+<div class="announcement-container" *ngIf="!isLoading && announcements.length > 0">
+  <mat-card *ngFor="let ann of announcements" class="announcement-card">
+    <mat-card-header>
+      <mat-card-title>{{ ann.title }}</mat-card-title>
+      <mat-card-subtitle>{{ ann.date | date: 'mediumDate' }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ ann.content }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div *ngIf="!isLoading && announcements.length === 0" class="no-data">
+  No announcements available.
+</div>
+
+<div *ngIf="isLoading" class="loading">
+  Loading announcements...
+</div>
+
+<div *ngIf="errorMsg" class="error">
+  {{ errorMsg }}
+</div>

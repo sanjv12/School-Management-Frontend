@@ -43,21 +43,45 @@
   </ng-container>
 
 
-  <!-- Teacher -->
   <ng-container *ngIf="role === 'teacher'">
-    <mat-list-item>
-      <mat-icon matListIcon>class</mat-icon>
-      <span matLine>My Classes</span>
+    <mat-list-item [routerLink]="['/teacher/upload-material']">
+      <mat-icon matListIcon>menu_book</mat-icon>
+      <span matLine>Upload Study Material</span>
     </mat-list-item>
 
-    <mat-list-item>
-      <mat-icon matListIcon>assignment</mat-icon>
-      <span matLine>Assignments</span>
+    <mat-list-item [routerLink]="['/teacher/upload-marks']">
+      <mat-icon matListIcon>grade</mat-icon>
+      <span matLine>Upload Marks</span>
     </mat-list-item>
 
-    <mat-list-item>
+    <mat-list-item [routerLink]="['/teacher/approve-leave']">
+      <mat-icon matListIcon>fact_check</mat-icon>
+      <span matLine>Approve Student Leave Request</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/teacher/upload-attendance']">
+      <mat-icon matListIcon>assignment_turned_in</mat-icon>
+      <span matLine>Upload Attendance</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/teacher/upload-announcement']">
+      <mat-icon matListIcon>campaign</mat-icon>
+      <span matLine>Upload Announcement</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/teacher/announcements']">
+      <mat-icon matListIcon>announcement</mat-icon>
+      <span matLine>View Announcements</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/teacher/request-leave']">
       <mat-icon matListIcon>event</mat-icon>
-      <span matLine>Apply Leave</span>
+      <span matLine>Request Leave to Principal</span>
+    </mat-list-item>
+
+    <mat-list-item [routerLink]="['/login']">
+      <mat-icon matListIcon>logout</mat-icon>
+      <span matLine>Logout</span>
     </mat-list-item>
   </ng-container>
 

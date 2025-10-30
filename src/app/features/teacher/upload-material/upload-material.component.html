@@ -1,0 +1,25 @@
+<div class="upload-container">
+  <h2>Upload Study Material</h2>
+
+  <form (ngSubmit)="onSubmit()" #uploadForm="ngForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Title</mat-label>
+      <input matInput name="title" [(ngModel)]="material.title" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Content</mat-label>
+      <textarea matInput name="contentText" [(ngModel)]="material.contentText" rows="5" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Class ID</mat-label>
+      <input matInput type="number" name="classId" [(ngModel)]="material.classId" required />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="uploadForm.invalid">Upload</button>
+  </form>
+
+  <p class="success" *ngIf="successMsg">{{ successMsg }}</p>
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+</div>
