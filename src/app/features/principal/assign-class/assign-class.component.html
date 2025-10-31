@@ -1,0 +1,23 @@
+<div class="assign-container">
+  <h2>Assign Teacher to Class</h2>
+
+  <mat-card *ngIf="classId">
+    <mat-card-content>
+      <p><strong>Class ID:</strong> {{ classId }}</p>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Select Teacher</mat-label>
+        <mat-select [(value)]="selectedTeacherId">
+          <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+            {{ teacher.userName }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="assignTeacher()"
+        [disabled]="!selectedTeacherId">
+        Assign Teacher
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

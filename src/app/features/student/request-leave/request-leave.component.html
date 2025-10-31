@@ -1,0 +1,9 @@
+<div class="leave-container">
+  <h2>Request Leave</h2>
+
+  <textarea [(ngModel)]="reason" placeholder="Enter reason for leave"></textarea>
+
+  <button (click)="requestLeave()">Request Leave</button>
+
+  <p *ngIf="message" class="message">{{ message }}</p>
+</div>

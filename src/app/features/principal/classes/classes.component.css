@@ -1,0 +1,36 @@
+.classes-container {
+  padding: 20px;
+}
+
+.header-card {
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-form-card {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.form-container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.form-field {
+  width: 200px;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.table-card {
+  padding: 20px;
+}

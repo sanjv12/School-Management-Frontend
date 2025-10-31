@@ -12,10 +12,10 @@
       <textarea matInput rows="5" formControlName="content"></textarea>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="full-width">
+    <!-- <mat-form-field appearance="outline" class="full-width">
       <mat-label>Teacher ID</mat-label>
       <input matInput type="number" formControlName="teacherId" />
-    </mat-form-field>
+    </mat-form-field> -->
 
     <button mat-raised-button color="primary" type="submit" [disabled]="isLoading">
       {{ isLoading ? 'Posting...' : 'Post Announcement' }}

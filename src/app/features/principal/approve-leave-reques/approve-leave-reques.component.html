@@ -1,0 +1,37 @@
+<div class="leave-container">
+  <h2>Teacher Leave Requests</h2>
+
+  <p *ngIf="message" class="message">{{ message }}</p>
+
+  <div *ngIf="leaves.length > 0; else noData">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Requester ID</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Requested At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let leave of leaves">
+          <td>{{ leave.id }}</td>
+          <td>{{ leave.requesterId }}</td>
+          <td>{{ leave.reason }}</td>
+          <td>{{ leave.status }}</td>
+          <td>{{ leave.createdAt | date:'short' }}</td>
+          <td>
+            <button mat-button color="primary" (click)="updateStatus(leave.id, 'APPROVED')" [disabled]="leave.status !== 'PENDING'">Approve</button>
+            <button mat-button color="warn" (click)="updateStatus(leave.id, 'DENIED')" [disabled]="leave.status !== 'PENDING'">Deny</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noData>
+    <p>No leave requests pending approval.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,22 @@
+.add-class-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.add-class-card {
+  width: 400px;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #3f51b5;
+}
+
+.form-field {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}

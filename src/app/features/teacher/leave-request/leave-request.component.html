@@ -1,0 +1,12 @@
+<div class="leave-container">
+  <h2>Request Leave</h2>
+
+  <form (ngSubmit)="submitRequest()" class="leave-form">
+    <label for="reason">Reason for Leave:</label>
+    <textarea id="reason" [(ngModel)]="leaveRequest.reason" name="reason" rows="4" placeholder="Enter reason"></textarea>
+
+    <button type="submit" class="submit-btn">Submit Request</button>
+  </form>
+
+  <p *ngIf="message" class="message">{{ message }}</p>
+</div>

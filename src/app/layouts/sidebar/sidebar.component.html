@@ -36,11 +36,34 @@
 </mat-list-item>
 
 
-    <mat-list-item>
+    <mat-list-item [routerLink]="['/principal/approve-leave']" *ngIf="role === 'principal'">
       <mat-icon matListIcon>notifications</mat-icon>
       <span matLine>Leave Approvals</span>
     </mat-list-item>
+
+    <mat-list-item [routerLink]="['/principal/classes']">
+    <mat-icon matListIcon>class</mat-icon>
+    <span matLine>Classes</span>
+  </mat-list-item>
+  <mat-list-item [routerLink]="['/login']">
+      <mat-icon matListIcon>logout</mat-icon>
+      <span matLine>Logout</span>
+    </mat-list-item>
+<!-- 
+  <mat-list-item [routerLink]="['/principal/assign-class']">
+    <mat-icon matListIcon>assignment_ind</mat-icon>
+    <span matLine>Assign Class (Teacher)</span>
+  </mat-list-item>
+
+  <mat-list-item [routerLink]="['/principal/assign-student']">
+    <mat-icon matListIcon>group_add</mat-icon>
+    <span matLine>Assign Student to Class</span>
+  </mat-list-item> -->
+
   </ng-container>
+
+
+
 
 
   <ng-container *ngIf="role === 'teacher'">

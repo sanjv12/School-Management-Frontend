@@ -1,0 +1,21 @@
+<div class="add-class-container">
+  <mat-card class="add-class-card">
+    <h2>Add New Class</h2>
+
+    <form [formGroup]="classForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Class Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter class name" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Class Code</mat-label>
+        <input matInput formControlName="code" placeholder="Enter class code" required>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="classForm.invalid">
+        Add Class
+      </button>
+    </form>
+  </mat-card>
+</div>

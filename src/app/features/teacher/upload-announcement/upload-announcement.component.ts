@@ -33,7 +33,7 @@ export class UploadAnnouncementComponent {
     this.announcementForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
-      teacherId: ['', Validators.required] // you can replace with auto teacher id later
+      // teacherId: ['', Validators.required] // you can replace with auto teacher id later
     });
   }
 
