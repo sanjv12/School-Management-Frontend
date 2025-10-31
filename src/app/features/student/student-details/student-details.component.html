@@ -1,0 +1,34 @@
+<mat-card class="student-details-card" *ngIf="student">
+  <h2>Student Details</h2>
+
+  <div class="info-section">
+    <p><b>Name:</b> {{ student.firstName }}</p>
+    <p><b>Email:</b> {{ student.email }}</p>
+    <p><b>Class ID:</b> {{ student.classId }}</p>
+    <p><b>Username:</b> {{ student.userName }}</p>
+  </div>
+</mat-card>
+
+<mat-card class="marks-card" *ngIf="marks.length > 0">
+  <h3>Marks</h3>
+  <table mat-table [dataSource]="marks" class="mat-elevation-z8 full-width">
+    <ng-container matColumnDef="subject">
+      <th mat-header-cell *matHeaderCellDef>Subject</th>
+      <td mat-cell *matCellDef="let element">{{ element.subject }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef>Score</th>
+      <td mat-cell *matCellDef="let element">{{ element.score }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['subject', 'score']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['subject', 'score'];"></tr>
+  </table>
+</mat-card>
+
+<mat-card class="attendance-card" *ngIf="attendance.length > 0">
+  <h3>Attendance Summary</h3>
+  <p><b>Total Days:</b> {{ attendance.length }}</p>
+  <p><b>Attendance Percentage:</b> {{ getAttendancePercentage() }}%</p>
+</mat-card>

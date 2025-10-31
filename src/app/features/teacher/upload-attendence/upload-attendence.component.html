@@ -1,0 +1,25 @@
+<mat-card class="attendance-card">
+  <h2>Upload Attendance</h2>
+
+  <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Student ID</mat-label>
+      <input matInput formControlName="studentId" placeholder="Enter Student ID" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Class ID</mat-label>
+      <input matInput formControlName="classId" placeholder="Enter Class ID" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="present">
+        <mat-option value="true">PRESENT</mat-option>
+        <mat-option value="false">ABSENT</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Submit Attendance</button>
+  </form>
+</mat-card>

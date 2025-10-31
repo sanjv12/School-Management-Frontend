@@ -1,0 +1,25 @@
+.attendance-card {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.present {
+  color: green;
+  font-weight: 600;
+}
+
+.absent {
+  color: red;
+  font-weight: 600;
+}
+
+.summary {
+  margin-top: 20px;
+  font-size: 15px;
+  line-height: 1.8;
+}

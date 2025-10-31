@@ -45,6 +45,10 @@
     <mat-icon matListIcon>class</mat-icon>
     <span matLine>Classes</span>
   </mat-list-item>
+  <mat-list-item [routerLink]="['/change-password']">
+      <mat-icon matListIcon>change_password</mat-icon>
+      <span matLine>Change password</span>
+    </mat-list-item>
   <mat-list-item [routerLink]="['/login']">
       <mat-icon matListIcon>logout</mat-icon>
       <span matLine>Logout</span>
@@ -101,6 +105,10 @@
       <mat-icon matListIcon>event</mat-icon>
       <span matLine>Request Leave to Principal</span>
     </mat-list-item>
+    <mat-list-item [routerLink]="['/change-password']">
+      <mat-icon matListIcon>change_password</mat-icon>
+      <span matLine>Change password</span>
+    </mat-list-item>
 
     <mat-list-item [routerLink]="['/login']">
       <mat-icon matListIcon>logout</mat-icon>
@@ -117,6 +125,7 @@
   <a mat-list-item routerLink="/student/marks"><mat-icon>grade</mat-icon>Marks</a>
   <a mat-list-item routerLink="/student/attendance"><mat-icon>fact_check</mat-icon>Attendance</a>
   <a mat-list-item routerLink="/student/details"><mat-icon>person</mat-icon>My Details</a>
+  <a mat-list-item routerLink="/change-password">Change Password</a>
   <a mat-list-item routerLink="/login"><mat-icon>logout</mat-icon>Logout</a>
 </mat-nav-list>
 </mat-nav-list>

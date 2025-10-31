@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router'; 
@@ -21,6 +21,7 @@ export class AuthService {
    * Sends credentials and handles the role string returned by the backend.
    * @returns An Observable of the user's role string.
    */
+
   login(username: string, password: string): Observable<string> {
     const loginPayload = { username, password };
 
@@ -45,7 +46,18 @@ export class AuthService {
       })
     );
   }
- 
+  
+  changePassword(username: string, oldPassword: string, newPassword: string): Observable<string> {
+    const params = new HttpParams()
+      .set('username', username)
+      .set('oldPassword', oldPassword)
+      .set('newPassword', newPassword);
+
+    return this.http.post(`${this.apiUrl}/change-password`, null, {
+      params,
+      responseType: 'text'
+    });
+  }
   public logout(): void {
     // 1. Clear the local service state
     this.userRole = null;

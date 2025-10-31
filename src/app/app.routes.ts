@@ -6,6 +6,7 @@ import { TeacherDashboardComponent } from './features/teacher/teacher-dashboard/
   import { PRINCIPAL_ROUTES } from './features/principal/principal.routes'; 
 import { studentRoutes } from './features/student/student.routes';
 import { TEACHER_ROUTES } from './features/teacher/teacher.routes';
+import { ChangePasswordComponent } from './features/change-password/change-password.component';
   export const routes: Routes = [
      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent }, 
@@ -15,4 +16,6 @@ import { TEACHER_ROUTES } from './features/teacher/teacher.routes';
       { path: 'principal', children: PRINCIPAL_ROUTES },
       {path:'student',children: studentRoutes },
       { path: 'teacher', children: TEACHER_ROUTES },
+      { path: 'change-password', component: ChangePasswordComponent }
+
    ];

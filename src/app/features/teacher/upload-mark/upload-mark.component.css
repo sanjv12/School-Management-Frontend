@@ -1,0 +1,12 @@
+.upload-card {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 15px;
+}
