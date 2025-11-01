@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { PrincipalService } from '../../../core/services/principal.service';
-
+import { CreateAnnouncementComponent } from '../create-announcement/create-announcement.component';
 @Component({
   selector: 'app-view-announcements',
   standalone: true,
-  imports: [CommonModule, MatCardModule],
+  imports: [CommonModule, MatCardModule,CreateAnnouncementComponent],
   templateUrl: './view-announcements.component.html',
   styleUrls: ['./view-announcements.component.css']
 })

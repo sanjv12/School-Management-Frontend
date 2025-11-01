@@ -1,48 +1,4 @@
-// import { Component } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { MatCardModule } from '@angular/material/card';
-// import { MatFormFieldModule } from '@angular/material/form-field';
-// import { MatInputModule } from '@angular/material/input';
-// import { MatButtonModule } from '@angular/material/button';
-// import { PrincipalService } from '../../../core/services/principal.service';
 
-// @Component({
-//   selector: 'app-create-announcement',
-//   standalone: true,
-//   imports: [CommonModule, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule],
-//   templateUrl: './create-announcement.component.html',
-//   styleUrls: ['./create-announcement.component.css']
-// })
-// export class CreateAnnouncementComponent {
-//   announcementForm: FormGroup;
-//   message = '';
-//   isSubmitting = false;
-
-//   constructor(private fb: FormBuilder, private principalService: PrincipalService) {
-//     this.announcementForm = this.fb.group({
-//       title: ['', Validators.required],
-//       content: ['', Validators.required]
-//     });
-//   }
-
-//   onSubmit() {
-//     if (this.announcementForm.invalid) return;
-//     this.isSubmitting = true;
-//     this.principalService.createAnnouncement(this.announcementForm.value).subscribe({
-//       next: () => {
-//         this.message = 'Announcement created successfully!';
-//         this.isSubmitting = false;
-//         this.announcementForm.reset();
-//       },
-//       error: (err) => {
-//         console.error(err);
-//         this.message = 'Error creating announcement';
-//         this.isSubmitting = false;
-//       }
-//     });
-//   }
-// }
 
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -52,7 +8,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-create-announcement',
   standalone: true,
@@ -72,7 +29,7 @@ export class CreateAnnouncementComponent {
   successMsg = '';
   errorMsg = '';
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient,private matsnackbar: MatSnackBar,private router:Router) {
     this.announcementForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
@@ -87,9 +44,11 @@ export class CreateAnnouncementComponent {
 
     this.http.post('http://localhost:8081/api/principal/announcements', payload).subscribe({
       next: () => {
-        this.successMsg = 'Announcement created successfully!';
+        // this.successMsg = 'Announcement created successfully!';
+        this.matsnackbar.open('Announcement created Successfully!!','close',{duration: 3000});
         this.errorMsg = '';
         this.announcementForm.reset();
+        this.router.navigate(['/principal']);
       },
       error: (err) => {
         console.error(err);

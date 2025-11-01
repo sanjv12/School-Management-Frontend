@@ -4,11 +4,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { PrincipalService } from '../../../core/services/principal.service';
-
+import { AddTeacherComponent } from '../add-teacher/add-teacher.component';
 @Component({
   selector: 'app-view-teachers',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatTableModule, MatCardModule, MatButtonModule,AddTeacherComponent],
   templateUrl: './view-teachers.component.html',
   styleUrls: ['./view-teachers.component.css']
 })

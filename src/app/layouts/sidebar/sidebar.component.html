@@ -5,34 +5,36 @@
 <mat-nav-list>
   <!-- Principal specific items -->
   <ng-container *ngIf="role === 'principal'">
-   <mat-list-item [routerLink]="['/principal/add-student']" *ngIf="role === 'principal'">
-  <mat-icon matListIcon>person_add</mat-icon>
-  <span matLine>Add Student</span>
-</mat-list-item>
+    
 
-     <mat-list-item [routerLink]="['/principal/add-teacher']" *ngIf="role === 'principal'">
+    <!-- <mat-list-item [routerLink]="['/principal/add-student']" *ngIf="role === 'principal'">
+    <mat-icon matListIcon>person_add</mat-icon>
+    <span matLine>Add Student</span>
+    </mat-list-item> -->
+
+     <!-- <mat-list-item [routerLink]="['/principal/add-teacher']" *ngIf="role === 'principal'">
     <mat-icon matListIcon>school</mat-icon>
     <span matLine>Add Teacher</span>
-  </mat-list-item>
+  </mat-list-item> -->
 
     <mat-list-item [routerLink]="['/principal/view-students']" *ngIf="role === 'principal'">
     <mat-icon matListIcon>people</mat-icon>
-    <span matLine>View Students</span>
+    <span matLine>Students</span>
     </mat-list-item>
 
     <mat-list-item [routerLink]="['/principal/view-teachers']" *ngIf="role === 'principal'">
       <mat-icon matListIcon>groups</mat-icon>
-      <span matLine>View Teachers</span>
+      <span matLine>Teachers</span>
     </mat-list-item>
 
-    <mat-list-item [routerLink]="['/principal/create-announcement']" *ngIf="role === 'principal'">
+    <!-- <mat-list-item [routerLink]="['/principal/create-announcement']" *ngIf="role === 'principal'">
   <mat-icon matListIcon>campaign</mat-icon>
   <span matLine>Create Announcement</span>
-</mat-list-item>
+</mat-list-item> -->
 
 <mat-list-item [routerLink]="['/principal/view-announcements']" *ngIf="role === 'principal'">
   <mat-icon matListIcon>announcement</mat-icon>
-  <span matLine>View Announcements</span>
+  <span matLine>Announcements</span>
 </mat-list-item>
 
 
@@ -46,7 +48,7 @@
     <span matLine>Classes</span>
   </mat-list-item>
   <mat-list-item [routerLink]="['/change-password']">
-      <mat-icon matListIcon>change_password</mat-icon>
+      <mat-icon matListIcon>lock</mat-icon>
       <span matLine>Change password</span>
     </mat-list-item>
   <mat-list-item [routerLink]="['/login']">
@@ -65,11 +67,6 @@
   </mat-list-item> -->
 
   </ng-container>
-
-
-
-
-
   <ng-container *ngIf="role === 'teacher'">
     <mat-list-item [routerLink]="['/teacher/upload-material']">
       <mat-icon matListIcon>menu_book</mat-icon>
@@ -106,7 +103,7 @@
       <span matLine>Request Leave to Principal</span>
     </mat-list-item>
     <mat-list-item [routerLink]="['/change-password']">
-      <mat-icon matListIcon>change_password</mat-icon>
+      <mat-icon matListIcon>lock</mat-icon>
       <span matLine>Change password</span>
     </mat-list-item>
 
@@ -125,7 +122,7 @@
   <a mat-list-item routerLink="/student/marks"><mat-icon>grade</mat-icon>Marks</a>
   <a mat-list-item routerLink="/student/attendance"><mat-icon>fact_check</mat-icon>Attendance</a>
   <a mat-list-item routerLink="/student/details"><mat-icon>person</mat-icon>My Details</a>
-  <a mat-list-item routerLink="/change-password">Change Password</a>
+  <a mat-list-item routerLink="/change-password"><mat-icon>lock</mat-icon>Change Password</a>
   <a mat-list-item routerLink="/login"><mat-icon>logout</mat-icon>Logout</a>
 </mat-nav-list>
 </mat-nav-list>

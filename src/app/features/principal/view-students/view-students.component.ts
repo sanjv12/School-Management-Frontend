@@ -4,11 +4,11 @@ import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { PrincipalService } from '../../../core/services/principal.service';
-
+import { AddStudentComponent } from '../add-student/add-student.component';
 @Component({
   selector: 'app-view-students',
   standalone: true,
-  imports: [CommonModule, MatTableModule, MatCardModule, MatButtonModule],
+  imports: [CommonModule, MatTableModule, MatCardModule, MatButtonModule,AddStudentComponent],
   templateUrl: './view-students.component.html',
   styleUrls: ['./view-students.component.css']
 })

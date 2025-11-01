@@ -11,7 +11,6 @@ import { AddClassComponent } from './add-class/add-class.component';
 import { AssignClassComponent } from './assign-class/assign-class.component';
 import { AssignStudentComponent } from './assign-student/assign-student.component';
 import { ClassesComponent } from './classes/classes.component';
-
 export const PRINCIPAL_ROUTES: Routes = [
   {
     path: '',
