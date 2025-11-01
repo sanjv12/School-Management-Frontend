@@ -21,7 +21,7 @@ interface Mark {
 })
 export class ViewMarksComponent implements OnInit {
   marks: Mark[] = [];
-  studentId: number = 1; // 🔹 Replace with logged-in student ID (from auth service later)
+  studentId = localStorage.getItem('userId'); // 🔹 Replace with logged-in student ID (from auth service later)
 
   displayedColumns: string[] = ['subject', 'score', 'classId'];
 

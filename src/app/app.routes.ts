@@ -7,15 +7,16 @@ import { TeacherDashboardComponent } from './features/teacher/teacher-dashboard/
 import { studentRoutes } from './features/student/student.routes';
 import { TEACHER_ROUTES } from './features/teacher/teacher.routes';
 import { ChangePasswordComponent } from './features/change-password/change-password.component';
+import { AuthGuard } from './auth.guard';
   export const routes: Routes = [
      { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent }, 
-      { path: 'principal', component: PrincipalDashboardComponent }, 
-      { path: 'teacher', component: TeacherDashboardComponent }, 
-      { path: 'student', component: StudentDashboardComponent }, 
+      { path: 'principal', component: PrincipalDashboardComponent, }, 
+      { path: 'teacher', component: TeacherDashboardComponent,canActivate: [AuthGuard] }, 
+      { path: 'student', component: StudentDashboardComponent,canActivate: [AuthGuard] }, 
       { path: 'principal', children: PRINCIPAL_ROUTES },
       {path:'student',children: studentRoutes },
       { path: 'teacher', children: TEACHER_ROUTES },
-      { path: 'change-password', component: ChangePasswordComponent }
+      { path: 'change-password', component: ChangePasswordComponent,canActivate: [AuthGuard] }
 
    ];

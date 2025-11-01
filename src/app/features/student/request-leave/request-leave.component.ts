@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../core/services/auth.service'; 
 
 @Component({
   selector: 'app-request-leave',
@@ -11,12 +12,23 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./request-leave.component.css']
 })
 export class RequestLeaveComponent {
-  studentId = 1; // Replace with actual logged-in student's ID (from auth later)
+  // studentId = 1; // Replace with actual logged-in student's ID (from auth later)
   reason = '';
   message = '';
+  studentId!: number; 
+  errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService: AuthService) {}
 
+  ngOnInit(): void {
+    const storedId = this.authService.getUserId();
+    if (storedId) {
+      this.studentId = storedId;
+      this.studentId = Number(storedId);
+    } else {
+      this.errorMessage = 'Unable to identify logged-in student.';
+    }
+  }
   requestLeave() {
     if (!this.reason.trim()) {
       this.message = 'Please enter a reason for leave.';

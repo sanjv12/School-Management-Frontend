@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthService } from '../../../core/services/auth.service'; 
 
 @Component({
   selector: 'app-view-attendance',
@@ -15,12 +16,20 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 export class ViewAttendanceComponent implements OnInit {
   displayedColumns: string[] = ['date', 'classId', 'status'];
   attendanceList: any[] = [];
-  studentId: number = 1; // 🔹 Replace with actual logged-in student ID
+  errorMessage = '';
+  studentId!: number; // 🔹 Replace with actual logged-in student ID
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private snackBar: MatSnackBar,private authService: AuthService) {}
 
-  ngOnInit() {
-    this.loadAttendance();
+  ngOnInit(): void {
+    const storedId = this.authService.getUserId();
+    if (storedId) {
+      this.studentId = storedId;
+      this.loadAttendance();
+      this.studentId = Number(storedId);
+    } else {
+      this.errorMessage = 'Unable to identify logged-in student.';
+    }
   }
 
   loadAttendance() {

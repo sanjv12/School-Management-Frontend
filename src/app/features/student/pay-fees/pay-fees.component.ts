@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
+import { AuthService } from '../../../core/services/auth.service'; 
 @Component({
   selector: 'app-pay-fees',
   standalone: true,
@@ -13,16 +13,23 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class PayFeesComponent implements OnInit {
 
-  studentId = 1; // 🔧 replace later with actual logged-in student's ID
+  studentId!: number;   // 🔧 replace later with actual logged-in student's ID
   feeDue: number | null = null;
   successMessage = '';
   errorMessage = '';
   isPaying = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.loadStudentFee();
+    
+    const storedId = this.authService.getUserId();
+    if (storedId) {
+      this.studentId = Number(storedId);
+      this.loadStudentFee();
+    } else {
+      this.errorMessage = 'Unable to identify logged-in student.';
+    }
   }
 
   loadStudentFee(): void {

@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, tap, catchError, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router'; 
+// import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,21 @@ import { Router } from '@angular/router';
 export class AuthService {
   private apiUrl = 'http://localhost:8081/api/auth';
   private userRole: string | null = null; // Store the role in the service
+  private username: string | null = null;
+  private userid: number | null = null;
 
   constructor(private http: HttpClient,private router: Router) { }
 
   public getRole(): string | null {
     return this.userRole || localStorage.getItem('userRole'); 
   }
-
+  public getUserName():string | null{
+    return this.username || localStorage.getItem('username');
+  }
+  public getUserId(): number | null {
+    const storedId = localStorage.getItem('userId');
+    return storedId ? Number(storedId) : this.userid;
+  }
   /**
    * Sends credentials and handles the role string returned by the backend.
    * @returns An Observable of the user's role string.
@@ -33,6 +42,22 @@ export class AuthService {
         // Store the role for global access and future navigation checks
         this.userRole = role; 
         localStorage.setItem('userRole', role);
+        if(role==='principal'){
+          this.userid=0;
+          localStorage.setItem('userId',"0");
+        } else {
+            localStorage.setItem('username', username);
+            this.fetchUserId(username).subscribe({
+              next: (userId: number) => {
+                this.userid = userId;
+                console.log(userId);
+                localStorage.setItem('userId', userId.toString());
+              },
+              error: (err) => {
+                console.error('Failed to fetch user ID:', err);
+              }
+            });
+        }
       }),
       
       catchError((error) => {
@@ -45,6 +70,10 @@ export class AuthService {
         return throwError(() => new Error(errorMessage));
       })
     );
+  }
+  private fetchUserId(username: string): Observable<number> {
+    return this.http.get<{ id: number }>(`${this.apiUrl}/${username}`,{ responseType: 'text'as 'json' })
+    .pipe(map(res => Number(res)));
   }
   
   changePassword(username: string, oldPassword: string, newPassword: string): Observable<string> {
@@ -59,17 +88,13 @@ export class AuthService {
     });
   }
   public logout(): void {
-    // 1. Clear the local service state
-    this.userRole = null;
-    
-    // 2. Clear stored items from browser storage
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('authToken'); // Assuming you might use one
-    // localStorage.clear();
-    // 3. Navigate the user back to the login page
-    this.router.navigate(['/login']);
-    
-    // Optional: Call a backend logout endpoint if needed (e.g., to invalidate a session/token)
-    // this.http.post(this.apiUrl + '/logout', {}).subscribe(() => console.log('Backend logged out'));
-  }
+  this.userRole = null;
+  this.username = null;
+  this.userid = null;
+  localStorage.removeItem('userRole');
+  localStorage.removeItem('username');
+  localStorage.removeItem('userId');
+  // localStorage.removeItem('authToken'); // optional
+  this.router.navigate(['/login']);
+}
 }

@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-
+import { AuthService } from '../../../core/services/auth.service'; 
 @Component({
   selector: 'app-student-details',
   standalone: true,
@@ -17,20 +17,27 @@ export class StudentDetailsComponent implements OnInit {
   student: any;
   marks: any[] = [];
   attendance: any[] = [];
-  studentId!: number;
+    studentId!: number; 
+  errorMessage = '';
 
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService,
   ) {}
 
-  ngOnInit() {
-    // this.studentId = Number(this.route.snapshot.paramMap.get('id'));
-    this.studentId = 1;
-    this.loadStudentDetails();
-    this.loadMarks();
-    this.loadAttendance();
+  ngOnInit(): void {
+    const storedId = this.authService.getUserId();
+    if (storedId) {
+      this.studentId = storedId;
+      this.loadAttendance();
+      this.loadStudentDetails();
+      this.loadMarks();
+      this.studentId = Number(storedId);
+    } else {
+      this.errorMessage = 'Unable to identify logged-in student.';
+    }
   }
 
   loadStudentDetails() {

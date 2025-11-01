@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { AuthService } from '../../../core/services/auth.service'; 
 interface Announcement {
   id: number;
   title: string;
@@ -21,15 +21,23 @@ interface Announcement {
 export class StudentAnnouncementsComponent implements OnInit {
   announcements: Announcement[] = [];
   isLoading = true;
+  studentId!: number; 
   errorMsg = '';
 
   private apiUrl = 'http://localhost:8081/api/student';
-  private studentId = 1; // 🔸 Replace later with actual logged-in student's ID
+  // 🔸 Replace later with actual logged-in student's ID
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.fetchAnnouncements();
+ ngOnInit(): void {
+    const storedId = this.authService.getUserId();
+    if (storedId) {
+      this.studentId = storedId;
+      this.fetchAnnouncements();
+      this.studentId = Number(storedId);
+    } else {
+      this.errorMsg = 'Unable to identify logged-in student.';
+    }
   }
 
   fetchAnnouncements() {

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AuthService } from '../../../core/services/auth.service'; 
 
 @Component({
   selector: 'app-study-material',
@@ -11,12 +12,20 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 })
 export class StudyMaterialComponent implements OnInit {
   materials: any[] = [];
-  studentId = 1;
+  studentId!: number; 
+  errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private authService: AuthService,) {}
 
-  ngOnInit(): void {
-    this.fetchMaterials();
+ ngOnInit(): void {
+    const storedId = this.authService.getUserId();
+    if (storedId) {
+      this.studentId = storedId;
+      this.fetchMaterials();
+      this.studentId = Number(storedId);
+    } else {
+      this.errorMessage = 'Unable to identify logged-in student.';
+    }
   }
 
   fetchMaterials() {

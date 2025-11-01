@@ -8,7 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-
+// import { Router } from 'express';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-change-password',
   standalone: true,
@@ -30,12 +31,13 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit() {
     this.changeForm = this.fb.group({
-      username: ['', Validators.required],
+      username: localStorage.getItem('username'),
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required]
     });
@@ -48,6 +50,7 @@ export class ChangePasswordComponent implements OnInit {
         next: (response) => {
           this.snackBar.open(response, 'Close', { duration: 3000 });
           this.changeForm.reset();
+          this.router.navigate(['/login']);
         },
         error: () => {
           this.snackBar.open('Failed to change password', 'Close', { duration: 3000 });

@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 // 1. Import the AuthService
 import { AuthService } from '../../../core/services/auth.service';
 
@@ -16,7 +17,8 @@ import { AuthService } from '../../../core/services/auth.service';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
@@ -31,6 +33,7 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder, 
     private router: Router, 
+    private snackBar: MatSnackBar,
     private authService: AuthService // Inject AuthService
   ) {
     this.loginForm = this.fb.group({
@@ -48,22 +51,10 @@ export class LoginComponent {
       return '/teacher';
     }else{
       this.authService.logout(); // Assuming you add a logout method
-        this.errorMsg = 'Unknown user role returned by server.';
+        this.errorMsg = 'Invlaid Username or Password.';
         return '/login'; 
     }
-    // switch (role) {
-    //   case 'principal':
-    //     return '/principal';
-    //   case 'student':
-    //     return '/student';
-    //   case 'teacher':
-    //     return '/teacher';
-    //   default:
-    //     // Handle unknown roles
-    //     this.authService.logout(); // Assuming you add a logout method
-    //     this.errorMsg = 'Unknown user role returned by server.';
-    //     return '/login'; 
-    // }
+
   }
   // 4. Update the onSubmit method
    onSubmit() {
@@ -86,7 +77,8 @@ export class LoginComponent {
         
         // Navigate based on the resolved path
         if (path !== '/login') {
-            alert(`Login successful as ${role}! Navigating...`);
+            // alert(`Login successful as ${role}! Navigating...`);
+            this.snackBar.open('Login Successful!!', 'Close', { duration: 3000 });
             // console.log(path);
             this.router.navigate([path]); 
         }
