@@ -15,7 +15,7 @@ import { AuthGuard } from './auth.guard';
       { path: 'teacher', component: TeacherDashboardComponent,canActivate: [AuthGuard] }, 
       { path: 'student', component: StudentDashboardComponent,canActivate: [AuthGuard] }, 
       { path: 'principal', children: PRINCIPAL_ROUTES },
-      {path:'student',children: studentRoutes },
+      { path:'student',children: studentRoutes },
       { path: 'teacher', children: TEACHER_ROUTES },
       { path: 'change-password', component: ChangePasswordComponent,canActivate: [AuthGuard] }
 

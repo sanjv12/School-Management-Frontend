@@ -1,6 +1,5 @@
 <div class="login-container">
   <h2>User Login</h2>
-
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Username</mat-label>
@@ -16,6 +15,5 @@
       {{ isLoading ? 'Verifying...' : 'Login' }}
     </button>
   </form>
-
   <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
 </div>

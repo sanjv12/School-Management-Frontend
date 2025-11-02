@@ -11,16 +11,16 @@ import { AddClassComponent } from './add-class/add-class.component';
 import { AssignClassComponent } from './assign-class/assign-class.component';
 import { AssignStudentComponent } from './assign-student/assign-student.component';
 import { ClassesComponent } from './classes/classes.component';
+
 export const PRINCIPAL_ROUTES: Routes = [
   {
-    path: '',
-    component: PrincipalDashboardComponent,
+    path: '',component: PrincipalDashboardComponent,
     children: [
-      { path: 'add-student', component: AddStudentComponent },
-      { path: 'add-teacher', component: AddTeacherComponent },
+      // { path: 'add-student', component: AddStudentComponent },
+      // { path: 'add-teacher', component: AddTeacherComponent },
        { path: 'view-students', component: ViewStudentsComponent },
        { path: 'view-teachers', component: ViewTeachersComponent },
-          { path: 'create-announcement', component: CreateAnnouncementComponent },
+        { path: 'create-announcement', component: CreateAnnouncementComponent },
       { path: 'view-announcements', component: ViewAnnouncementsComponent },
       { path: 'approve-leave', component: ApproveLeaveComponent},
       { path: 'add-class', component: AddClassComponent },

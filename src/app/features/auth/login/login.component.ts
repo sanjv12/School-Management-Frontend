@@ -23,6 +23,7 @@ import { AuthService } from '../../../core/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
 
   loginForm!: FormGroup;  
@@ -54,7 +55,6 @@ export class LoginComponent {
         this.errorMsg = 'Invlaid Username or Password.';
         return '/login'; 
     }
-
   }
   // 4. Update the onSubmit method
    onSubmit() {

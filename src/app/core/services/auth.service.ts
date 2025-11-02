@@ -72,7 +72,7 @@ export class AuthService {
     );
   }
   private fetchUserId(username: string): Observable<number> {
-    return this.http.get<{ id: number }>(`${this.apiUrl}/${username}`,{ responseType: 'text'as 'json' })
+    return this.http.get<{ id: number }>(`${this.apiUrl}/${username}/${this.getRole()}`,{ responseType: 'text'as 'json' })
     .pipe(map(res => Number(res)));
   }
   
