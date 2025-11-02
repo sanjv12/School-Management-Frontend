@@ -98,7 +98,7 @@
 
     <mat-list-item [routerLink]="['/teacher/request-leave']">
       <mat-icon matListIcon>event</mat-icon>
-      <span matLine>Request Leave to Principal</span>
+      <span matLine>Request Leave </span>
     </mat-list-item>
     <mat-list-item [routerLink]="['/change-password']">
       <mat-icon matListIcon>lock</mat-icon>
@@ -114,7 +114,7 @@
   <!-- Student -->
  <mat-nav-list *ngIf="role === 'student'">
   <a mat-list-item routerLink="/student/pay-fees"><mat-icon>payment</mat-icon>Pay Fees</a>
-  <a mat-list-item routerLink="/student/request-leave"><mat-icon>event</mat-icon>Request Leave</a>
+  <a mat-list-item routerLink="/student/request-leave"><mat-icon>event</mat-icon>Leave</a>
   <a mat-list-item routerLink="/student/study-material"><mat-icon>menu_book</mat-icon>Study Material</a>
   <a mat-list-item routerLink="/student/announcements"><mat-icon>campaign</mat-icon>Announcements</a>
   <a mat-list-item routerLink="/student/marks"><mat-icon>grade</mat-icon>Marks</a>

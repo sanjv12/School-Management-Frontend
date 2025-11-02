@@ -39,3 +39,23 @@ button:hover {
   font-weight: bold;
   color: green;
 }
+
+.approve-container {
+  padding: 20px;
+}
+
+.leave-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.leave-table th, .leave-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.leave-table th {
+  background-color: #f4f4f4;
+}

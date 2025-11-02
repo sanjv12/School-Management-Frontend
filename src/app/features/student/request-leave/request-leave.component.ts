@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../../core/services/auth.service'; 
@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-request-leave',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,DatePipe],
   templateUrl: './request-leave.component.html',
   styleUrls: ['./request-leave.component.css']
 })
@@ -17,17 +17,24 @@ export class RequestLeaveComponent {
   message = '';
   studentId!: number; 
   errorMessage = '';
-
+ leaveRequests: any[] = [];
   constructor(private http: HttpClient,private authService: AuthService) {}
-
+  apiUrl = 'http://localhost:8081/api/student';
   ngOnInit(): void {
     const storedId = this.authService.getUserId();
     if (storedId) {
       this.studentId = storedId;
       this.studentId = Number(storedId);
+      this.loadRequests();
     } else {
       this.errorMessage = 'Unable to identify logged-in student.';
     }
+  }
+  loadRequests(): void {
+    this.http.get<any[]>(`${this.apiUrl}/leave/${this.studentId}`).subscribe({
+      next: (data) => {this.leaveRequests = data;},
+      error: (err) => console.error('Error fetching leave requests', err)
+    });
   }
   requestLeave() {
     if (!this.reason.trim()) {

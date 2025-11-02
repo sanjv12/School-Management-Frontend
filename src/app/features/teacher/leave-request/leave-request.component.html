@@ -10,3 +10,36 @@
 
   <p *ngIf="message" class="message">{{ message }}</p>
 </div>
+<div class="approve-container">
+  <h2>Pending Leave Requests</h2>
+
+  @if (leaveRequests.length === 0) {
+    <p>No leave requests assigned to you.</p>
+  } @else {
+    <table class="leave-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Requester ID</th>
+          <th>Role</th>
+          <th>Reason</th>
+          <th>Status</th>
+          <th>Created</th>
+          <!-- <th>Actions</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        @for (req of leaveRequests; track req.id) {
+          <tr>
+            <td>{{ req.id }}</td>
+            <td>{{ req.requesterId }}</td>
+            <td>{{ req.requesterRole }}</td>
+            <td>{{ req.reason }}</td>
+            <td>{{ req.status }}</td>
+            <td>{{ req.createdAt | date:'short' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
