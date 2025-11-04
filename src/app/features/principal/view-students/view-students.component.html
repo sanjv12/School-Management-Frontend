@@ -5,7 +5,11 @@
   <div *ngIf="error" class="status error">{{ error }}</div>
 
   <table mat-table [dataSource]="students" class="mat-elevation-z8" *ngIf="!loading && !error">
-    
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Student ID </th>
+      <td mat-cell *matCellDef="let student"> {{ student.id }} </td>
+    </ng-container>
     <!-- Username -->
     <ng-container matColumnDef="userName">
       <th mat-header-cell *matHeaderCellDef> Username </th>
@@ -36,6 +40,21 @@
       <td mat-cell *matCellDef="let student"> ₹{{ student.feeDue }} </td>
     </ng-container>
 
+    <ng-container matColumnDef="classId">
+      <th mat-header-cell *matHeaderCellDef> Class Id </th>
+      <td mat-cell *matCellDef="let student"> {{ student.classId }} </td>
+    </ng-container>
+    <ng-container matColumnDef="teacherId">
+      <th mat-header-cell *matHeaderCellDef> TeacherID </th>
+      <td mat-cell *matCellDef="let student"> {{ student.teacherId }} </td>
+    </ng-container>
+          <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let student">
+          <button mat-button color="primary" (click)="updateStudent(student)">Edit</button>
+          <button mat-button color="warn" (click)="deleteStudent(student.id)">Delete</button>
+        </td>
+      </ng-container>
     <!-- Header and Row -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

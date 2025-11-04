@@ -18,7 +18,8 @@
       <mat-card-title>{{ ann.title }}</mat-card-title>
       <mat-card-content>
         <p>{{ ann.content }}</p>
-        <p class="date">{{ ann.date | date:'medium' }}</p>
+        <p>Announcement from : {{ann.setterRole}}</p>
+        <p>Announced On: {{ ann.createdAt |  slice:0:10 }}</p>
       </mat-card-content>
     </mat-card>
   </div>

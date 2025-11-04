@@ -33,7 +33,8 @@ export class CreateAnnouncementComponent {
     this.announcementForm = this.fb.group({
       title: ['', Validators.required],
       content: ['', Validators.required],
-      targetRole: ['', Validators.required] // 👈 Added field
+      targetRole: ['', Validators.required],
+      setterRole: ['Principal'] // 👈 Added field
     });
   }
 
@@ -41,7 +42,7 @@ export class CreateAnnouncementComponent {
     if (this.announcementForm.invalid) return;
 
     const payload = this.announcementForm.value;
-
+    console.log(payload);
     this.http.post('http://localhost:8081/api/principal/announcements', payload).subscribe({
       next: () => {
         // this.successMsg = 'Announcement created successfully!';

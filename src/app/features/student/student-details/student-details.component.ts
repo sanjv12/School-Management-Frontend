@@ -42,7 +42,7 @@ export class StudentDetailsComponent implements OnInit {
 
   loadStudentDetails() {
     this.http.get(`http://localhost:8081/api/student/${this.studentId}`).subscribe({
-      next: (data) => this.student = data,
+      next: (data) => {this.student = data; console.log(data);},
       error: (err) => this.snackBar.open('Failed to load student details', 'Close', { duration: 3000 })
     });
   }

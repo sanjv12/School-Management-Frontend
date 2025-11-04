@@ -6,22 +6,20 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { AuthService } from '../../../core/services/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-pay-fees',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
+    FormsModule,            // ✅ only FormsModule needed for ngModel
     MatCardModule,
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
-    MatFormFieldModule,   
-    MatInputModule,       
-    MatSelectModule  
+    MatFormFieldModule
   ],
   templateUrl: './pay-fees.component.html',
   styleUrls: ['./pay-fees.component.css']
@@ -34,16 +32,13 @@ export class PayFeesComponent implements OnInit {
   errorMessage = '';
   isPaying = false;
 
-  paymentMethod: string = ''; // 'upi' or 'card'
-
-  // UPI fields
-  upiId: string = '';
-
-  // Card fields
-  cardNumber: string = '';
-  expiryDate: string = '';
-  cvv: string = '';
-  remarks: string = 'School Fees';
+  paymentMethod = '';     // 'upi' or 'card'
+  upiId = '';
+  payingAmount = 0;
+  cardNumber = '';
+  expiryDate = '';
+  cvv = '';
+  remarks = 'School Fees';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -62,6 +57,7 @@ export class PayFeesComponent implements OnInit {
       .subscribe({
         next: (data) => {
           this.feeDue = data.feeDue;
+          this.payingAmount = data.feeDue;
         },
         error: (err) => {
           console.error('Error loading student data:', err);
@@ -75,7 +71,14 @@ export class PayFeesComponent implements OnInit {
       this.errorMessage = 'No pending fees to pay.';
       return;
     }
-
+    if (!this.payingAmount) {
+      this.errorMessage = 'Enter amount.';
+      return;
+    }
+    if (this.payingAmount > this.feeDue) {
+      this.errorMessage = 'Amount exceeds due.';
+      return;
+    }
     if (!this.paymentMethod) {
       this.errorMessage = 'Please select a payment method.';
       return;
@@ -94,13 +97,12 @@ export class PayFeesComponent implements OnInit {
         this.isPaying = false;
         return;
       }
-
       transactionUrl = 'http://localhost:8081/api/transaction/transferByUpi';
       transactionData = {
         fromUpiId: this.upiId,
         toUpiId: 'school@bank',
         toAccountNumber: '1234567890',
-        amount: this.feeDue,
+        amount: this.payingAmount,
         remarks: this.remarks,
       };
 
@@ -110,7 +112,6 @@ export class PayFeesComponent implements OnInit {
         this.isPaying = false;
         return;
       }
-
       transactionUrl = 'http://localhost:8081/api/transaction/transferbyDebiCard';
       transactionData = {
         creditCardNumber: this.cardNumber,
@@ -118,18 +119,18 @@ export class PayFeesComponent implements OnInit {
         creditCardExpiryDate: this.expiryDate,
         toUpiId: 'school@bank',
         toAccountNumber: '1234567890',
-        amount: this.feeDue,
+        amount: this.payingAmount,
         remarks: this.remarks
       };
     }
 
-    // Step 1️⃣ - Perform the transaction first
+    // Step 1️⃣ - Perform the transaction
     this.http.post<any>(transactionUrl, transactionData)
       .subscribe({
         next: (response) => {
           if (response?.status === 'Transaction Successful' || response === 'Transaction Successful') {
             // Step 2️⃣ - Mark fee as paid
-            this.http.post(`http://localhost:8081/api/student/${this.studentId}/pay`, {})
+            this.http.post(`http://localhost:8081/api/student/${this.studentId}/pay/${this.payingAmount}`, {})
               .subscribe({
                 next: () => {
                   this.successMessage = 'Payment successful! Fees marked as paid.';

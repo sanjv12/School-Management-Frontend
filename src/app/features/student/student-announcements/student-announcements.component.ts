@@ -8,7 +8,9 @@ interface Announcement {
   id: number;
   title: string;
   content: string;
+  setterRole:string;
   date: string;
+  createdAt:string;
 }
 
 @Component({
@@ -47,6 +49,7 @@ export class StudentAnnouncementsComponent implements OnInit {
         next: (data) => {
           this.announcements = data;
           this.isLoading = false;
+          console.log(data);
         },
         error: (err) => {
           console.error(err);

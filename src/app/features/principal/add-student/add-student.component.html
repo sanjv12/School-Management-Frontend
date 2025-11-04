@@ -2,10 +2,17 @@
   <h2>Add New Student</h2>
 
   <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
-    <mat-form-field appearance="outline">
+    <!-- <mat-form-field appearance="outline">
       <mat-label>Username</mat-label>
       <input matInput formControlName="userName" required>
-    </mat-form-field>
+    </mat-form-field> -->
+    <mat-form-field appearance="outline">
+  <mat-label>Username</mat-label>
+  <input matInput formControlName="userName" />
+  <mat-error *ngIf="studentForm.get('userName')?.hasError('usernameTaken')">
+    Username already exists. Choose another one.
+  </mat-error>
+</mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>

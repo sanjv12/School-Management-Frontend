@@ -4,9 +4,21 @@
   <div *ngIf="feeDue !== null">
     <p><strong>Amount Due:</strong> ₹{{ feeDue }}</p>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Paying Amount</mat-label>
+      <input
+        matInput
+        type="number"
+        [(ngModel)]="payingAmount"
+        name="payingAmount"
+        [max]="feeDue"
+        placeholder="Enter amount"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
       <mat-label>Payment Method</mat-label>
-      <select matNativeControl [(ngModel)]="paymentMethod">
+      <select matNativeControl [(ngModel)]="paymentMethod" name="paymentMethod">
         <option value="">Select Method</option>
         <option value="upi">UPI</option>
         <option value="card">Card</option>
@@ -15,33 +27,28 @@
 
     <!-- UPI Fields -->
     <div *ngIf="paymentMethod === 'upi'">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>UPI ID</mat-label>
-        <input matInput [(ngModel)]="upiId" placeholder="e.g., ranjeetha3213@bank">
+        <input matInput [(ngModel)]="upiId" name="upiId" placeholder="e.g., user@bank">
       </mat-form-field>
     </div>
 
     <!-- Card Fields -->
     <div *ngIf="paymentMethod === 'card'">
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Card Number</mat-label>
-        <input matInput [(ngModel)]="cardNumber" maxlength="16">
+        <input matInput [(ngModel)]="cardNumber" name="cardNumber" maxlength="16">
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>Expiry Date</mat-label>
-        <input matInput type="date" [(ngModel)]="expiryDate">
+        <input matInput type="date" [(ngModel)]="expiryDate" name="expiryDate">
       </mat-form-field>
 
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="full-width">
         <mat-label>CVV</mat-label>
-        <input matInput [(ngModel)]="cvv" maxlength="3">
+        <input matInput [(ngModel)]="cvv" name="cvv" maxlength="3">
       </mat-form-field>
-
-      <!-- <mat-form-field appearance="outline">
-        <mat-label>Remarks</mat-label>
-        <input matInput [(ngModel)]="remarks" placeholder="Optional note">
-      </mat-form-field> -->
     </div>
 
     <button mat-raised-button color="primary" (click)="payFee()" [disabled]="isPaying">

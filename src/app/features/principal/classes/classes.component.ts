@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-classes',
   standalone: true,
@@ -35,7 +35,7 @@ export class ClassesComponent implements OnInit {
     code: ''
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private matsnackbar : MatSnackBar) {}
 
   ngOnInit(): void {
     this.loadClasses();
@@ -60,7 +60,8 @@ export class ClassesComponent implements OnInit {
 
     this.http.post('http://localhost:8081/api/principal/classes', this.newClass).subscribe({
       next: () => {
-        alert('Class added successfully!');
+        // alert('Class added successfully!');
+         this.matsnackbar.open("Class Added Successfully!!",'close',{duration:3000});
         this.showAddForm = false;
         this.newClass = { name: '', code: '' };
         this.loadClasses(); // refresh
